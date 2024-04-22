@@ -1,0 +1,11 @@
+FROM mongo:7.0.7
+
+ENV MONGO_INITDB_ROOT_USERNAME=root
+ENV MONGO_INITDB_ROOT_PASSWORD=1234qwer!
+ENV MONGO_INITDB_DATABASE=jlog
+
+COPY initDB.js /docker-entrypoint-initdb.d/
+
+EXPOSE 27017
+
+CMD [ "mongod" ]
