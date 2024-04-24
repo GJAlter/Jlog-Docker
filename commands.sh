@@ -6,19 +6,16 @@ docker network create jlog-network
 docker volume create jlog-volume-db
 docker volume create jlog-volume-resource
 
-cd db
 # mongodb
 echo "=> DB(Mongo) Build & Run"
 docker build -t gjdeveloper/jlog-db:1.0.0 .
 docker run -d -p 27017:27017 -v jlog-volume-db:/data/db --network jlog-network --name jlog-db gjdeveloper/jlog-db:1.0.0
 
-cd ../back
 # backend
 echo "=> Backend(Spring Boot, Tomcat) Build & Run"
 docker build -t gjdeveloper/jlog-back:1.1.0 .
 docker run -d -p 8080:8080 -e DB_HOST=jlog-db -e DB_ID=gjdeveloper -e DB_PW=1234qwer! -v jlog-volume-resource:/usr/local/jlog/files --network jlog-network --name jlog-back gjdeveloper/jlog-back:1.1.0
 
-cd ../front
 # frontend
 echo "=> Frontend(React(ts), Nginx) Build & Run"
 docker build -t gjdeveloper/jlog-front:1.1.0 .
