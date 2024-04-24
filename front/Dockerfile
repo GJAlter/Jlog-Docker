@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY ./source /app
 
-RUN npm ci && npm run build
+RUN npm ci
+RUN npm run build
 
 FROM nginx:1.25.5-alpine
 
